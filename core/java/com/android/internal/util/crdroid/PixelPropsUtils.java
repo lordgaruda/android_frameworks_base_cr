@@ -77,7 +77,6 @@ public final class PixelPropsUtils {
             "com.android.vending",
             "com.google.android.aicore",
             "com.google.android.apps.aiwallpapers",
-            "com.google.android.apps.bard",
             "com.google.android.apps.customization.pixel",
             "com.google.android.apps.emojiwallpaper",
             "com.google.android.apps.nexuslauncher",
@@ -167,6 +166,12 @@ public final class PixelPropsUtils {
             "com.tencent.ig",
             "com.tencent.tmgp.pubgmhd",
             "com.vng.pubgmobile"
+    };
+
+    // Packages to Spoof as Pixel 9 ProXL
+    private static final String[] packagesToChangePixel9ProXL = {
+            "com.google.android.apps.bard",
+            "com.google.android.apps.subscriptions.red",
     };
 
     private static volatile boolean sIsFinsky = false;
@@ -350,6 +355,13 @@ public final class PixelPropsUtils {
             } else if (Arrays.asList(packagesToChangeS24U).contains(packageName)) {
                 if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
                 for (Map.Entry<String, Object> prop : propsToChangeS24U.entrySet()) {
+                    String key = prop.getKey();
+                    Object value = prop.getValue();
+                    setPropValue(key, value);
+                }
+            } else if (Arrays.asList(packagesToChangePixel9ProXL).contains(packageName)) {
+                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
+                for (Map.Entry<String, Object> prop : propsToChangePixel9ProXL.entrySet()) {
                     String key = prop.getKey();
                     Object value = prop.getValue();
                     setPropValue(key, value);
